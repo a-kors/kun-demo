@@ -1,0 +1,159 @@
+---
+import { Image } from 'astro:assets';
+import altaiImg from '../assets/photos/altai.jpg';
+import { master, groups, retreat } from '../data/master';
+---
+
+<section id="groups" class="gr">
+  <div class="wrap">
+    <header class="section-head" data-reveal>
+      <span class="section-eyebrow">Группы и&nbsp;обучение</span>
+      <h2>Курсы, мастер-классы и&nbsp;нейроретрит в&nbsp;горах&nbsp;Алтая.</h2>
+      <p>
+        Все программы проходят по&nbsp;мере набора группы. Напишите, чтобы
+        узнать о&nbsp;ближайшем.
+      </p>
+    </header>
+
+    <article class="retreat" data-reveal>
+      <figure class="retreat__photo">
+        <Image
+          src={altaiImg}
+          alt="Екатерина Кун на Алтае"
+          widths={[480, 720, 960]}
+          sizes="(max-width: 860px) 90vw, 440px"
+          format="webp"
+          quality={84}
+          loading="lazy"
+        />
+      </figure>
+      <div class="retreat__copy">
+        <span class="kind">{retreat.kind}</span>
+        <h3>{retreat.title}</h3>
+        <p>{retreat.text}</p>
+        <a class="btn btn-secondary" href={master.primary}>
+          <span>Узнать о&nbsp;наборе</span>
+          <span class="arrow" aria-hidden="true">→</span>
+        </a>
+      </div>
+    </article>
+
+    <div class="grid">
+      {groups.map((g, i) => (
+        <article class="card" data-reveal data-reveal-delay={Math.min((i % 3) * 90, 180)}>
+          <span class="kind">{g.kind}</span>
+          <h3>{g.title}</h3>
+          <p>{g.text}</p>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .gr {
+    background: var(--bg);
+  }
+  .kind {
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .retreat {
+    display: grid;
+    grid-template-columns: 1fr 1.15fr;
+    gap: clamp(24px, 4vw, 56px);
+    align-items: center;
+    background: #ffffff;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    padding: clamp(18px, 2.4vw, 28px);
+    margin-bottom: 18px;
+  }
+  .retreat > * {
+    min-width: 0;
+  }
+  .retreat__photo {
+    margin: 0;
+  }
+  .retreat__photo :global(img) {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    object-position: center 35%;
+    border-radius: 16px;
+    display: block;
+  }
+  .retreat__copy {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+    padding-right: clamp(0px, 2vw, 24px);
+  }
+  .retreat h3 {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    font-size: clamp(26px, 3vw, 36px);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin: 0;
+  }
+  .retreat p {
+    color: var(--ink-muted);
+    font-size: 16.5px;
+    line-height: 1.6;
+    margin: 0 0 6px;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+  }
+  .card {
+    background: #ffffff;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 24px 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .card h3 {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 1.2;
+    letter-spacing: -0.015em;
+    margin: 0;
+  }
+  .card p {
+    margin: 0;
+    font-size: 14.5px;
+    line-height: 1.55;
+    color: var(--ink-muted);
+  }
+
+  .grid > .card:last-child:nth-child(3n + 1) {
+    grid-column: 1 / -1;
+  }
+
+  @media (max-width: 1024px) {
+    .grid > .card:last-child:nth-child(3n + 1) {
+      grid-column: auto;
+    }
+    .grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (max-width: 760px) {
+    .retreat {
+      grid-template-columns: 1fr;
+    }
+    .grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
