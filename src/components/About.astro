@@ -179,15 +179,19 @@ import { bioFacts, education } from '../data/master';
       grid-template-columns: 1fr;
     }
     .photo {
-      max-width: 320px;
-    }
-    .facts {
-      grid-template-columns: 1fr;
-      gap: 16px;
+      max-width: 440px;
+      width: 100%;
+      margin: 0 auto;
     }
     .edu li {
       grid-template-columns: 1fr;
       gap: 2px;
+    }
+  }
+  @media (max-width: 560px) {
+    .facts {
+      grid-template-columns: 1fr;
+      gap: 16px;
     }
   }
 </style>
